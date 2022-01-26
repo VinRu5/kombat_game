@@ -12,7 +12,7 @@ class TitleGame extends StatelessWidget {
         child: Text(
           value.toUpperCase(),
           style: TextStyle(
-              fontSize: 43,
+              fontSize: 40,
               color: Colors.amber.shade800,
               fontWeight: FontWeight.bold),
         ),

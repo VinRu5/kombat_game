@@ -1,5 +1,7 @@
 import 'dart:math';
 
+enum Team { blue, red }
+
 //creo una classe astratta per tutti i personaggi
 abstract class Character {
   //tutti i personaggi avranno almeno un nome ed una linea salute
@@ -8,9 +10,11 @@ abstract class Character {
   final int attackPower;
   final int defensePower;
   final String profileImage;
+  final Team team;
 
   //constructor per la classe
-  Character(this.name, this.attackPower, this.defensePower, this.profileImage);
+  Character(this.name, this.attackPower, this.defensePower, this.profileImage,
+      this.team);
 
   //function comuni
   String attacks();
@@ -27,8 +31,15 @@ class Warrior extends Character {
     int attackPower,
     int defensePower,
     String profileImage,
+    Team team,
     this.hisSuperPower,
-  ) : super(name, attackPower, defensePower, profileImage);
+  ) : super(
+          name,
+          attackPower,
+          defensePower,
+          profileImage,
+          team,
+        );
 
   @override
   String attacks() => 'Attacco con i miei fortissimi pugni';
@@ -49,8 +60,15 @@ class Archer extends Character {
     int attackPower,
     int defensePower,
     String profileImage,
+    Team team,
     this.hisSuperPower,
-  ) : super(name, attackPower, defensePower, profileImage);
+  ) : super(
+          name,
+          attackPower,
+          defensePower,
+          profileImage,
+          team,
+        );
 
   @override
   String attacks() => 'Le mie freccie colpiscono tutte al cuore';
@@ -72,8 +90,15 @@ class Knight extends Character {
     int attackPower,
     int defensePower,
     String profileImage,
+    Team team,
     this.hisSuperPower,
-  ) : super(name, attackPower, defensePower, profileImage);
+  ) : super(
+          name,
+          attackPower,
+          defensePower,
+          profileImage,
+          team,
+        );
 
   @override
   String attacks() => 'Con lancia o spada ti travolgerò';
@@ -92,16 +117,57 @@ int randomNum(int max) {
   return random.nextInt(max);
 }
 
-// final teamBlue = [
-//   Warrior('Spiderman', 25, 15, 'assets/images/cavaliere_2.png', 'Ragnatela'),
-//   Archer('Legolas', 18, 10, 'assets/images/arciere_2.png', 'Tre freccie'),
-//   Knight('Warm', 27, 20, 'assets/images/cavaliere_2_1.png', 'Carica superiore'),
-// ];
+final setTeamBlue = [
+  Warrior(
+    'Spiderman',
+    25,
+    15,
+    'assets/images/cavaliere_2.png',
+    Team.blue,
+    'Ragnatela',
+  ),
+  Archer(
+    'Legolas',
+    18,
+    10,
+    'assets/images/arciere_2.png',
+    Team.blue,
+    'Tre freccie',
+  ),
+  Knight(
+    'Warm',
+    27,
+    20,
+    'assets/images/cavaliere_2_1.png',
+    Team.blue,
+    'Carica superiore',
+  ),
+];
 
-// //istanzio il team red
-// final teamRed = [
-//   Warrior(
-//       'He-Man', 17, 15, 'assets/images/cavaliere_1.png', 'Graffio profondo'),
-//   Archer('Atinius', 22, 10, 'assets/images/arciere_1.png', 'Freccie circolari'),
-//   Knight('Mah', 25, 20, 'assets/images/cavaliere_1_1.png', 'Carica superiore'),
-// ];
+//istanzio il team red
+final setTeamRed = [
+  Warrior(
+    'He-Man',
+    17,
+    15,
+    'assets/images/cavaliere_1.png',
+    Team.red,
+    'Graffio profondo',
+  ),
+  Archer(
+    'Atinius',
+    22,
+    10,
+    'assets/images/arciere_1.png',
+    Team.red,
+    'Freccie circolari',
+  ),
+  Knight(
+    'Mah',
+    25,
+    20,
+    'assets/images/cavaliere_1_1.png',
+    Team.red,
+    'Carica superiore',
+  ),
+];

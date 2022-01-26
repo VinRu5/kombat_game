@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kombat_game/components/challanger_card.dart';
 import 'package:kombat_game/functions/character.dart';
 import 'package:kombat_game/components/character_card.dart';
 
@@ -17,11 +18,11 @@ class ChallengingCharacters extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CharacterCard(
+        ChallangerCard(
           character: userCharacter,
           color: 'blue',
         ),
-        CharacterCard(
+        ChallangerCard(
           character: challangerCharacter,
           color: 'red',
         ),

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/functions/character.dart';
 
-class CharacterCard extends StatelessWidget {
+class ChallangerCard extends StatelessWidget {
   final Character character;
   final String color;
-  final void Function() onTap;
-  const CharacterCard({
+  const ChallangerCard({
     required this.character,
     required this.color,
-    required this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -16,7 +14,7 @@ class CharacterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: onTap,
+        onTap: () {},
         splashColor: colorTeam(),
         child: Padding(
           padding: const EdgeInsets.all(8.0),

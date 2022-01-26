@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kombat_game/functions/character.dart';
 import 'package:kombat_game/screen/choice-character.dart';
 import 'package:kombat_game/screen/game.dart';
 
@@ -10,7 +11,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool userChose = true;
+  bool userChoose = false;
+  late Character userCharacter;
+  late Character challangerCharacter;
+
+  void choicedThis(Character character) {
+    List<Character> challangerTeam = setTeamBlue;
+
+    if (character.team == Team.blue) {
+      challangerTeam = setTeamRed;
+    }
+
+    Character challanger = challangerTeam[randomNum(challangerTeam.length)];
+
+    setState(() {
+      userChoose = true;
+      userCharacter = character;
+      challangerCharacter = challanger;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +39,14 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.amber.shade700,
       ),
-      body: userChose ? Game() : ChoiceCharacter(),
+      body: userChoose
+          ? Game(
+              userCharacter: userCharacter,
+              challangerCharacter: challangerCharacter,
+            )
+          : ChoiceCharacter(
+              choicedThis: (character) => choicedThis(character),
+            ),
     );
   }
 }

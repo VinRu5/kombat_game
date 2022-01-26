@@ -5,7 +5,13 @@ import 'package:kombat_game/functions/character.dart';
 import 'package:kombat_game/functions/sentence.dart';
 
 class Game extends StatefulWidget {
-  const Game({Key? key}) : super(key: key);
+  late Character userCharacter;
+  late Character challangerCharacter;
+  Game({
+    required this.userCharacter,
+    required this.challangerCharacter,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _GameState createState() => _GameState();
@@ -13,11 +19,8 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   int countTurn = 0;
-  Character userCharacter = Warrior(
-      'Spiderman', 25, 15, 'assets/images/cavaliere_2.png', 'Ragnatela');
-
-  Character challangerCharacter = Archer(
-      'Atinius', 22, 10, 'assets/images/arciere_1.png', 'Freccie circolari');
+  late Character userCharacter;
+  late Character challangerCharacter;
 
   List<SentenceTurn> sentences = [];
 
@@ -65,6 +68,13 @@ class _GameState extends State<Game> {
       countTurn += 1;
       sentences = [turn, ...sentences];
     });
+  }
+
+  @override
+  void initState() {
+    userCharacter = widget.userCharacter;
+    challangerCharacter = widget.challangerCharacter;
+    super.initState();
   }
 
   @override
