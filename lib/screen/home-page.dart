@@ -16,9 +16,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Kombat Game'),
-        ),
+        title: Text('Kombat Game'),
+        centerTitle: true,
+        backgroundColor: Colors.amber.shade700,
       ),
       body: userChose ? Game() : ChoiceCharacter(),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/components/challenging_characters.dart';
-import 'package:kombat_game/components/sentences.dart';
+import 'package:kombat_game/components/sentences_turn.dart';
 import 'package:kombat_game/functions/character.dart';
 import 'package:kombat_game/functions/sentence.dart';
 
@@ -19,8 +19,7 @@ class _GameState extends State<Game> {
   Character challangerCharacter = Archer(
       'Atinius', 22, 10, 'assets/images/arciere_1.png', 'Freccie circolari');
 
-  List<Sentence> userSentences = [];
-  List<Sentence> challangerSentences = [];
+  List<SentenceTurn> sentences = [];
 
   nextTurn() {
     Character striker;
@@ -40,9 +39,9 @@ class _GameState extends State<Game> {
       defender.health -= amountAttack;
     }
 
-    setState(() {
-      countTurn += 1;
-      userSentences.add(Sentence(
+    SentenceTurn turn = SentenceTurn(
+      turn: (countTurn + 1),
+      userSentence: Sentence(
         text: striker == userCharacter
             ? userCharacter.attacks()
             : userCharacter.defend(),
@@ -50,8 +49,8 @@ class _GameState extends State<Game> {
             ? Icons.swap_horiz
             : Icons.health_and_safety,
         color: Colors.blue,
-      ));
-      challangerSentences.add(Sentence(
+      ),
+      challangerSentence: Sentence(
         text: striker == challangerCharacter
             ? challangerCharacter.attacks()
             : challangerCharacter.defend(),
@@ -59,7 +58,12 @@ class _GameState extends State<Game> {
             ? Icons.swap_horiz
             : Icons.health_and_safety,
         color: Colors.red,
-      ));
+      ),
+    );
+
+    setState(() {
+      countTurn += 1;
+      sentences = [turn, ...sentences];
     });
   }
 
@@ -90,6 +94,10 @@ class _GameState extends State<Game> {
                     ? null
                     : nextTurn,
             child: Text('Avvia il prossimo turno'),
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.amber.shade700),
+            ),
           ),
         ),
         SizedBox(
@@ -99,9 +107,8 @@ class _GameState extends State<Game> {
           userCharacter: userCharacter,
           challangerCharacter: challangerCharacter,
         ),
-        Sentences(
-          userSentences: userSentences,
-          challangerSentences: challangerSentences,
+        SentencesTurn(
+          sentences: sentences,
         ),
       ],
     );

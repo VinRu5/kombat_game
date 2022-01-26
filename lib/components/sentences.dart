@@ -3,11 +3,10 @@ import 'package:kombat_game/components/sentence_card.dart';
 import 'package:kombat_game/functions/sentence.dart';
 
 class Sentences extends StatelessWidget {
-  final List<Sentence> userSentences;
-  final List<Sentence> challangerSentences;
+  final SentenceTurn sentences;
+
   const Sentences({
-    required this.userSentences,
-    required this.challangerSentences,
+    required this.sentences,
     Key? key,
   }) : super(key: key);
 
@@ -16,16 +15,22 @@ class Sentences extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(
-          children: userSentences
-              .map((sentence) => SentenceCard(sentence: sentence))
-              .toList(),
+        Text(
+          sentences.turn.toString(),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.amber.shade700,
+            shadows: [
+              Shadow(
+                color: Colors.black12,
+                blurRadius: 5,
+              ),
+            ],
+          ),
         ),
-        Column(
-          children: challangerSentences
-              .map((sentence) => SentenceCard(sentence: sentence))
-              .toList(),
-        ),
+        SentenceCard(sentence: sentences.userSentence),
+        SentenceCard(sentence: sentences.challangerSentence),
       ],
     );
   }

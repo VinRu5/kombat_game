@@ -11,3 +11,15 @@ class Sentence {
     required this.color,
   });
 }
+
+class SentenceTurn {
+  late Sentence userSentence;
+  late Sentence challangerSentence;
+  late int turn;
+
+  SentenceTurn({
+    required this.userSentence,
+    required this.challangerSentence,
+    required this.turn,
+  });
+}
