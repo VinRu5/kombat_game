@@ -66,6 +66,33 @@ class _GameState extends State<Game> {
       ),
     );
 
+    if (defender.health <= 0) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('${striker.name} ha vinto'),
+          actions: [
+            ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.amber.shade700),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  widget.restartApplication();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.restart_alt),
+                    Text('Ricomincia'),
+                  ],
+                ))
+          ],
+        ),
+      );
+    }
+
     setState(() {
       countTurn += 1;
       sentences = [turn, ...sentences];

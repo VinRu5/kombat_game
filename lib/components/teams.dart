@@ -12,20 +12,42 @@ class Teams extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Iterable<Character> getTeamBlue() sync* {
-    for (final character in teams) {
-      if (character.team == Team.blue) {
-        yield character;
-      }
-    }
-  }
+  // Iterable<Character> getTeamBlue() sync* {
+  //   for (final character in teams) {
+  //     if (character.team == Team.blue) {
+  //       yield character;
+  //     }
+  //   }
+  // }
 
-  Iterable<Character> getTeamRed() sync* {
-    for (final character in teams) {
-      if (character.team == Team.red) {
-        yield character;
-      }
-    }
+  // Iterable<Character> getTeamRed() sync* {
+  //   for (final character in teams) {
+  //     if (character.team == Team.red) {
+  //       yield character;
+  //     }
+  //   }
+  // }
+
+  void advertisingToChoose(context, character) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text('Hai scelto ${character.name}. Vuoi continuare?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              choicedThis(character);
+            },
+            child: Text('SI'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('NO'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -38,7 +60,7 @@ class Teams extends StatelessWidget {
               .map((character) => CharacterCard(
                     character: character,
                     color: 'blue',
-                    onTap: () => choicedThis(character),
+                    onTap: () => advertisingToChoose(context, character),
                   ))
               .toList(),
         ),
@@ -47,7 +69,7 @@ class Teams extends StatelessWidget {
               .map((character) => CharacterCard(
                     character: character,
                     color: 'red',
-                    onTap: () => choicedThis(character),
+                    onTap: () => advertisingToChoose(context, character),
                   ))
               .toList(),
         ),

@@ -135,61 +135,6 @@ int randomNum(int max) {
   return random.nextInt(max);
 }
 
-final setTeamBlue = [
-  Warrior(
-    'Spiderman',
-    25,
-    15,
-    'assets/images/cavaliere_2.png',
-    Team.blue,
-    'Ragnatela',
-  ),
-  Archer(
-    'Legolas',
-    18,
-    10,
-    'assets/images/arciere_2.png',
-    Team.blue,
-    'Tre freccie',
-  ),
-  Knight(
-    'Warm',
-    27,
-    20,
-    'assets/images/cavaliere_2_1.png',
-    Team.blue,
-    'Carica superiore',
-  ),
-];
-
-//istanzio il team red
-final setTeamRed = [
-  Warrior(
-    'He-Man',
-    17,
-    15,
-    'assets/images/cavaliere_1.png',
-    Team.red,
-    'Graffio profondo',
-  ),
-  Archer(
-    'Atinius',
-    22,
-    10,
-    'assets/images/arciere_1.png',
-    Team.red,
-    'Freccie circolari',
-  ),
-  Knight(
-    'Mah',
-    25,
-    20,
-    'assets/images/cavaliere_1_1.png',
-    Team.red,
-    'Carica superiore',
-  ),
-];
-
 final setTeams = [
   Warrior(
     'Spiderman',
@@ -240,3 +185,19 @@ final setTeams = [
     'Carica superiore',
   ),
 ];
+
+Iterable<Character> getTeamBlue() sync* {
+  for (final character in setTeams) {
+    if (character.team == Team.blue) {
+      yield character;
+    }
+  }
+}
+
+Iterable<Character> getTeamRed() sync* {
+  for (final character in setTeams) {
+    if (character.team == Team.red) {
+      yield character;
+    }
+  }
+}

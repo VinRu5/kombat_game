@@ -33,10 +33,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void choicedThis(Character character) {
-    List<Character> challangerTeam = setTeamBlue;
+    List<Character> challangerTeam = getTeamBlue().toList();
 
     if (character.team == Team.blue) {
-      challangerTeam = setTeamRed;
+      challangerTeam = getTeamRed().toList();
     }
 
     Character challanger = challangerTeam[randomNum(challangerTeam.length)];
