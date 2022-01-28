@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kombat_game/functions/sentence.dart';
+import 'package:kombat_game/models/sentence.dart';
 
 class SentenceCard extends StatelessWidget {
   final Sentence sentence;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/components/sentences.dart';
-import 'package:kombat_game/functions/sentence.dart';
+import 'package:kombat_game/models/sentence.dart';
 
 class SentencesTurn extends StatelessWidget {
   final List<SentenceTurn> sentences;

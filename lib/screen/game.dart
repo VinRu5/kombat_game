@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/components/challenging_characters.dart';
 import 'package:kombat_game/components/sentences_turn.dart';
-import 'package:kombat_game/functions/character.dart';
-import 'package:kombat_game/functions/sentence.dart';
+import 'package:kombat_game/models/character.dart';
+import 'package:kombat_game/models/sentence.dart';
 
 class Game extends StatefulWidget {
   late Character userCharacter;
   late Character challangerCharacter;
+  void Function() restartApplication;
   Game({
     required this.userCharacter,
     required this.challangerCharacter,
+    required this.restartApplication,
     Key? key,
   }) : super(key: key);
 
@@ -98,16 +100,30 @@ class _GameState extends State<Game> {
           height: 10,
         ),
         Center(
-          child: ElevatedButton(
-            onPressed:
-                userCharacter.health <= 0 || challangerCharacter.health <= 0
-                    ? null
-                    : nextTurn,
-            child: Text('Avvia il prossimo turno'),
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.amber.shade700),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed:
+                    userCharacter.health <= 0 || challangerCharacter.health <= 0
+                        ? null
+                        : nextTurn,
+                child: Text('Avvia il prossimo turno'),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.amber.shade700),
+                ),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () => widget.restartApplication(),
+                child: Icon(Icons.restart_alt),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.amber.shade700),
+                ),
+              )
+            ],
           ),
         ),
         SizedBox(

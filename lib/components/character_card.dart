@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kombat_game/functions/character.dart';
+import 'package:kombat_game/models/character.dart';
 
 class CharacterCard extends StatelessWidget {
   final Character character;

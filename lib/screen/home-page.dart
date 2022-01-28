@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kombat_game/functions/character.dart';
+import 'package:kombat_game/models/character.dart';
 import 'package:kombat_game/screen/choice-character.dart';
 import 'package:kombat_game/screen/game.dart';
 
@@ -14,6 +14,23 @@ class _HomePageState extends State<HomePage> {
   bool userChoose = false;
   late Character userCharacter;
   late Character challangerCharacter;
+  late List<Character> teams;
+
+  @override
+  void initState() {
+    teams = setTeams;
+
+    super.initState();
+  }
+
+  void restartApplication() {
+    teams.forEach((character) => character.health = 100);
+
+    //print(teamBlue);
+    setState(() {
+      userChoose = false;
+    });
+  }
 
   void choicedThis(Character character) {
     List<Character> challangerTeam = setTeamBlue;
@@ -43,9 +60,11 @@ class _HomePageState extends State<HomePage> {
           ? Game(
               userCharacter: userCharacter,
               challangerCharacter: challangerCharacter,
+              restartApplication: restartApplication,
             )
           : ChoiceCharacter(
               choicedThis: (character) => choicedThis(character),
+              teams: teams,
             ),
     );
   }

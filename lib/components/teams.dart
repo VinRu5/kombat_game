@@ -1,69 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/components/character_card.dart';
-import 'package:kombat_game/functions/character.dart';
+import 'package:kombat_game/models/character.dart';
 
 class Teams extends StatelessWidget {
-  final teamBlue = [
-    Warrior(
-      'Spiderman',
-      25,
-      15,
-      'assets/images/cavaliere_2.png',
-      Team.blue,
-      'Ragnatela',
-    ),
-    Archer(
-      'Legolas',
-      18,
-      10,
-      'assets/images/arciere_2.png',
-      Team.blue,
-      'Tre freccie',
-    ),
-    Knight(
-      'Warm',
-      27,
-      20,
-      'assets/images/cavaliere_2_1.png',
-      Team.blue,
-      'Carica superiore',
-    ),
-  ];
-
-//istanzio il team red
-  final teamRed = [
-    Warrior(
-      'He-Man',
-      17,
-      15,
-      'assets/images/cavaliere_1.png',
-      Team.red,
-      'Graffio profondo',
-    ),
-    Archer(
-      'Atinius',
-      22,
-      10,
-      'assets/images/arciere_1.png',
-      Team.red,
-      'Freccie circolari',
-    ),
-    Knight(
-      'Mah',
-      25,
-      20,
-      'assets/images/cavaliere_1_1.png',
-      Team.red,
-      'Carica superiore',
-    ),
-  ];
-
   void Function(Character character) choicedThis;
+  final List<Character> teams;
 
   Teams({
     required this.choicedThis,
+    required this.teams,
     Key? key,
   }) : super(key: key);
+
+  Iterable<Character> getTeamBlue() sync* {
+    for (final character in teams) {
+      if (character.team == Team.blue) {
+        yield character;
+      }
+    }
+  }
+
+  Iterable<Character> getTeamRed() sync* {
+    for (final character in teams) {
+      if (character.team == Team.red) {
+        yield character;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +34,7 @@ class Teams extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Column(
-          children: teamBlue
+          children: getTeamBlue()
               .map((character) => CharacterCard(
                     character: character,
                     color: 'blue',
@@ -80,7 +43,7 @@ class Teams extends StatelessWidget {
               .toList(),
         ),
         Column(
-          children: teamRed
+          children: getTeamRed()
               .map((character) => CharacterCard(
                     character: character,
                     color: 'red',
