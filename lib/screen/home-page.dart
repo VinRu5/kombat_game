@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/models/character.dart';
 import 'package:kombat_game/screen/choice-character.dart';
+import 'package:kombat_game/screen/create_character.dart';
 import 'package:kombat_game/screen/game.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,22 +51,39 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Kombat Game'),
-        centerTitle: true,
-        backgroundColor: Colors.amber.shade700,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Kombat Game'),
+          centerTitle: true,
+          backgroundColor: Colors.amber.shade700,
+          bottom: TabBar(
+            indicatorColor: Colors.white,
+            tabs: [
+              Icon(Icons.sports_esports),
+              Icon(Icons.add_circle),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            viewUserChoose(),
+            CreateCharacter(),
+          ],
+        ),
       ),
-      body: userChoose
-          ? Game(
-              userCharacter: userCharacter,
-              challangerCharacter: challangerCharacter,
-              restartApplication: restartApplication,
-            )
-          : ChoiceCharacter(
-              choicedThis: (character) => choicedThis(character),
-              teams: teams,
-            ),
     );
   }
+
+  Widget viewUserChoose() => userChoose
+      ? Game(
+          userCharacter: userCharacter,
+          challangerCharacter: challangerCharacter,
+          restartApplication: restartApplication,
+        )
+      : ChoiceCharacter(
+          choicedThis: (character) => choicedThis(character),
+          teams: teams,
+        );
 }
