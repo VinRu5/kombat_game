@@ -11,10 +11,11 @@ abstract class Character {
   final int defensePower;
   final String profileImage;
   final Team team;
+  final Photo valuePhoto;
 
   //constructor per la classe
   Character(this.name, this.attackPower, this.defensePower, this.profileImage,
-      this.team);
+      this.team, this.valuePhoto);
 
   //function comuni
   String attacks();
@@ -32,14 +33,9 @@ class Warrior extends Character {
     int defensePower,
     String profileImage,
     Team team,
+    Photo valuePhoto,
     this.hisSuperPower,
-  ) : super(
-          name,
-          attackPower,
-          defensePower,
-          profileImage,
-          team,
-        );
+  ) : super(name, attackPower, defensePower, profileImage, team, valuePhoto);
 
   @override
   String attacks() => 'Attacco con i miei fortissimi pugni';
@@ -67,6 +63,7 @@ class Archer extends Character {
     int defensePower,
     String profileImage,
     Team team,
+    Photo valuePhoto,
     this.hisSuperPower,
   ) : super(
           name,
@@ -74,6 +71,7 @@ class Archer extends Character {
           defensePower,
           profileImage,
           team,
+          valuePhoto,
         );
 
   @override
@@ -103,6 +101,7 @@ class Knight extends Character {
     int defensePower,
     String profileImage,
     Team team,
+    Photo valuePhoto,
     this.hisSuperPower,
   ) : super(
           name,
@@ -110,6 +109,7 @@ class Knight extends Character {
           defensePower,
           profileImage,
           team,
+          valuePhoto,
         );
 
   @override
@@ -128,6 +128,18 @@ class Knight extends Character {
   ''';
 }
 
+class PhotoCharacter {
+  String asset;
+  Photo value;
+  Team team;
+
+  PhotoCharacter(
+    this.asset,
+    this.team,
+    this.value,
+  );
+}
+
 //funzione per generare numero random
 int randomNum(int max) {
   var random = Random();
@@ -142,6 +154,7 @@ final setTeams = [
     15,
     'assets/images/cavaliere_2.png',
     Team.blue,
+    Photo.warriorBlue,
     'Ragnatela',
   ),
   Archer(
@@ -150,6 +163,7 @@ final setTeams = [
     10,
     'assets/images/arciere_2.png',
     Team.blue,
+    Photo.archerBlue,
     'Tre freccie',
   ),
   Knight(
@@ -158,6 +172,7 @@ final setTeams = [
     20,
     'assets/images/cavaliere_2_1.png',
     Team.blue,
+    Photo.knigthBlue,
     'Carica superiore',
   ),
   Warrior(
@@ -166,6 +181,7 @@ final setTeams = [
     15,
     'assets/images/cavaliere_1.png',
     Team.red,
+    Photo.warriorRed,
     'Graffio profondo',
   ),
   Archer(
@@ -174,6 +190,7 @@ final setTeams = [
     10,
     'assets/images/arciere_1.png',
     Team.red,
+    Photo.archerRed,
     'Freccie circolari',
   ),
   Knight(
@@ -182,7 +199,41 @@ final setTeams = [
     20,
     'assets/images/cavaliere_1_1.png',
     Team.red,
+    Photo.knigthRed,
     'Carica superiore',
+  ),
+];
+
+final viewRadio = [
+  PhotoCharacter(
+    'assets/images/cavaliere_2.png',
+    Team.blue,
+    Photo.warriorBlue,
+  ),
+  PhotoCharacter(
+    'assets/images/arciere_2.png',
+    Team.blue,
+    Photo.archerBlue,
+  ),
+  PhotoCharacter(
+    'assets/images/cavaliere_2_1.png',
+    Team.blue,
+    Photo.knigthBlue,
+  ),
+  PhotoCharacter(
+    'assets/images/cavaliere_1.png',
+    Team.red,
+    Photo.warriorRed,
+  ),
+  PhotoCharacter(
+    'assets/images/arciere_1.png',
+    Team.red,
+    Photo.archerRed,
+  ),
+  PhotoCharacter(
+    'assets/images/cavaliere_1_1.png',
+    Team.red,
+    Photo.knigthRed,
   ),
 ];
 
@@ -200,4 +251,13 @@ Iterable<Character> getTeamRed() sync* {
       yield character;
     }
   }
+}
+
+enum Photo {
+  warriorBlue,
+  warriorRed,
+  archerBlue,
+  archerRed,
+  knigthBlue,
+  knigthRed,
 }

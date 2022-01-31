@@ -12,22 +12,6 @@ class Teams extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  // Iterable<Character> getTeamBlue() sync* {
-  //   for (final character in teams) {
-  //     if (character.team == Team.blue) {
-  //       yield character;
-  //     }
-  //   }
-  // }
-
-  // Iterable<Character> getTeamRed() sync* {
-  //   for (final character in teams) {
-  //     if (character.team == Team.red) {
-  //       yield character;
-  //     }
-  //   }
-  // }
-
   void advertisingToChoose(context, character) {
     showDialog(
       context: context,
@@ -54,6 +38,7 @@ class Teams extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           children: getTeamBlue()

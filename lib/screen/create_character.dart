@@ -3,15 +3,6 @@ import 'package:kombat_game/components/editor_line.dart';
 import 'package:kombat_game/components/slot_create.dart';
 import 'package:kombat_game/models/character.dart';
 
-enum Photo {
-  warriorBlue,
-  warriorRed,
-  archerBlue,
-  archerRed,
-  knigthBlue,
-  knigthRed,
-}
-
 class CreateCharacter extends StatefulWidget {
   const CreateCharacter({Key? key}) : super(key: key);
 
@@ -20,10 +11,11 @@ class CreateCharacter extends StatefulWidget {
 }
 
 class _CreateCharacterState extends State<CreateCharacter> {
-  Photo? photoValue = Photo.warriorBlue;
+  Photo photoValue = Photo.warriorBlue;
   TextEditingController inputText = TextEditingController();
-  int attackValue = 0;
-  int defenseValue = 0;
+  int attackValue = 10;
+  int defenseValue = 10;
+  bool _validate = false;
 
   void setRadio(value) {
     setState(() {
@@ -32,85 +24,96 @@ class _CreateCharacterState extends State<CreateCharacter> {
   }
 
   void generateHero() {
-    print(inputText.text);
-    print(photoValue);
-    print(attackValue);
-    print(defenseValue);
+    if (inputText.text.isEmpty) {
+      setState(() {
+        _validate = true;
+      });
+    } else {
+      _validate = false;
+      Character hero = Warrior(
+        inputText.text,
+        attackValue,
+        defenseValue,
+        'assets/images/cavaliere_2.png',
+        Team.blue,
+        photoValue,
+        '',
+      );
 
-    Character hero = Warrior(
-      inputText.text,
-      attackValue,
-      defenseValue,
-      'assets/images/cavaliere_2.png',
-      Team.blue,
-      '',
-    );
+      switch (photoValue) {
+        case Photo.archerBlue:
+          hero = Archer(
+            inputText.text,
+            attackValue,
+            defenseValue,
+            'assets/images/arciere_2.png',
+            Team.blue,
+            photoValue,
+            '',
+          );
+          break;
+        case Photo.warriorBlue:
+          hero = Warrior(
+            inputText.text,
+            attackValue,
+            defenseValue,
+            'assets/images/cavaliere_2.png',
+            Team.blue,
+            photoValue,
+            '',
+          );
+          break;
+        case Photo.archerRed:
+          hero = Archer(
+            inputText.text,
+            attackValue,
+            defenseValue,
+            'assets/images/arciere_1.png',
+            Team.red,
+            photoValue,
+            '',
+          );
+          break;
+        case Photo.knigthBlue:
+          hero = Knight(
+            inputText.text,
+            attackValue,
+            defenseValue,
+            'assets/images/cavaliere_2_1.png',
+            Team.blue,
+            photoValue,
+            '',
+          );
+          break;
+        case Photo.warriorRed:
+          hero = Archer(
+            inputText.text,
+            attackValue,
+            defenseValue,
+            'assets/images/cavaliere_1.png',
+            Team.red,
+            photoValue,
+            '',
+          );
+          break;
+        case Photo.knigthRed:
+          hero = Archer(
+            inputText.text,
+            attackValue,
+            defenseValue,
+            'assets/images/cavaliere_1_1.png',
+            Team.red,
+            photoValue,
+            '',
+          );
+          break;
+      }
 
-    switch (photoValue) {
-      case Photo.archerBlue:
-        hero = Archer(
-          inputText.text,
-          attackValue,
-          defenseValue,
-          'assets/images/arciere_2.png',
-          Team.blue,
-          '',
-        );
-        break;
-      case Photo.warriorBlue:
-        hero = Warrior(
-          inputText.text,
-          attackValue,
-          defenseValue,
-          'assets/images/cavaliere_2.png',
-          Team.blue,
-          '',
-        );
-        break;
-      case Photo.archerRed:
-        hero = Archer(
-          inputText.text,
-          attackValue,
-          defenseValue,
-          'assets/images/arciere_1.png',
-          Team.red,
-          '',
-        );
-        break;
-      case Photo.knigthBlue:
-        hero = Knight(
-          inputText.text,
-          attackValue,
-          defenseValue,
-          'assets/images/cavaliere_2_1.png',
-          Team.blue,
-          '',
-        );
-        break;
-      case Photo.warriorRed:
-        hero = Archer(
-          inputText.text,
-          attackValue,
-          defenseValue,
-          'assets/images/cavaliere_1.png',
-          Team.red,
-          '',
-        );
-        break;
-      case Photo.knigthRed:
-        hero = Archer(
-          inputText.text,
-          attackValue,
-          defenseValue,
-          'assets/images/cavaliere_1_1.png',
-          Team.red,
-          '',
-        );
-        break;
+      setTeams.add(hero);
+      print(hero);
     }
 
-    setTeams.add(hero);
-    print(hero);
+    inputText.clear();
   }
 
   void setAttackValue(value) {
@@ -145,9 +148,17 @@ class _CreateCharacterState extends State<CreateCharacter> {
             text: 'Inserisci il nome del tuo Eroe',
             child: TextField(
               controller: inputText,
+              cursorColor: Colors.amber.shade700,
               decoration: InputDecoration(
+                errorText: _validate ? 'Devi inserire un nome' : null,
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 2, color: Colors.amber.shade700),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
+
+                  //borderSide: const BorderSide(color: Colors.red, width: 0.0),
                 ),
               ),
             ),
@@ -161,6 +172,9 @@ class _CreateCharacterState extends State<CreateCharacter> {
             text: 'Scegli la tue caratteristiche',
           ),
           ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.amber.shade700),
+            ),
             onPressed: generateHero,
             child: Text('Crea'),
           ),
@@ -184,105 +198,46 @@ class _CreateCharacterState extends State<CreateCharacter> {
 
   Widget viewImages() => Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/cavaliere_2.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.contain,
-                  ),
-                  Radio(
-                    value: Photo.warriorBlue,
-                    groupValue: photoValue,
-                    onChanged: (value) => setRadio(value),
-                  ),
-                ],
+          SizedBox(
+            height: 250,
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 0.7,
               ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/arciere_2.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.contain,
+              itemCount: viewRadio.length,
+              itemBuilder: (context, index) => Container(
+                padding: EdgeInsets.only(top: 12),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 2,
+                    color: viewRadio[index].team == Team.blue
+                        ? Colors.blue
+                        : Colors.red,
                   ),
-                  Radio(
-                    value: Photo.archerBlue,
-                    groupValue: photoValue,
-                    onChanged: (value) => setRadio(value),
-                  ),
-                ],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      viewRadio[index].asset,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.contain,
+                    ),
+                    Radio(
+                      fillColor:
+                          MaterialStateProperty.all(Colors.amber.shade700),
+                      value: viewRadio[index].value,
+                      groupValue: photoValue,
+                      onChanged: (value) => setRadio(value),
+                    ),
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/cavaliere_2_1.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.contain,
-                  ),
-                  Radio(
-                    value: Photo.knigthBlue,
-                    groupValue: photoValue,
-                    onChanged: (value) => setRadio(value),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/cavaliere_1.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.contain,
-                  ),
-                  Radio(
-                    value: Photo.warriorRed,
-                    groupValue: photoValue,
-                    onChanged: (value) => setRadio(value),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/arciere_1.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.contain,
-                  ),
-                  Radio(
-                    value: Photo.archerRed,
-                    groupValue: photoValue,
-                    onChanged: (value) => setRadio(value),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/cavaliere_1_1.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.contain,
-                  ),
-                  Radio(
-                    value: Photo.knigthRed,
-                    groupValue: photoValue,
-                    onChanged: (value) => setRadio(value),
-                  ),
-                ],
-              ),
-            ],
+            ),
           )
         ],
       );

@@ -14,20 +14,24 @@ class EditorLine extends StatefulWidget {
 }
 
 class _EditorLineState extends State<EditorLine> {
-  int value = 0;
+  int value = 10;
 
   void addValue() {
-    setState(() {
-      value += 1;
-    });
-    widget.onChange(value);
+    if (value < 35) {
+      setState(() {
+        value += 1;
+      });
+      widget.onChange(value);
+    }
   }
 
   void removeValue() {
-    setState(() {
-      value -= 1;
-    });
-    widget.onChange(value);
+    if (value > 0) {
+      setState(() {
+        value -= 1;
+      });
+      widget.onChange(value);
+    }
   }
 
   @override
