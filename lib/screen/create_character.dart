@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/components/editor_line.dart';
 import 'package:kombat_game/components/slot_create.dart';
+import 'package:kombat_game/models/character.dart';
 
 enum Photo {
   warriorBlue,
@@ -35,6 +36,81 @@ class _CreateCharacterState extends State<CreateCharacter> {
     print(photoValue);
     print(attackValue);
     print(defenseValue);
+
+    Character hero = Warrior(
+      inputText.text,
+      attackValue,
+      defenseValue,
+      'assets/images/cavaliere_2.png',
+      Team.blue,
+      '',
+    );
+
+    switch (photoValue) {
+      case Photo.archerBlue:
+        hero = Archer(
+          inputText.text,
+          attackValue,
+          defenseValue,
+          'assets/images/arciere_2.png',
+          Team.blue,
+          '',
+        );
+        break;
+      case Photo.warriorBlue:
+        hero = Warrior(
+          inputText.text,
+          attackValue,
+          defenseValue,
+          'assets/images/cavaliere_2.png',
+          Team.blue,
+          '',
+        );
+        break;
+      case Photo.archerRed:
+        hero = Archer(
+          inputText.text,
+          attackValue,
+          defenseValue,
+          'assets/images/arciere_1.png',
+          Team.red,
+          '',
+        );
+        break;
+      case Photo.knigthBlue:
+        hero = Knight(
+          inputText.text,
+          attackValue,
+          defenseValue,
+          'assets/images/cavaliere_2_1.png',
+          Team.blue,
+          '',
+        );
+        break;
+      case Photo.warriorRed:
+        hero = Archer(
+          inputText.text,
+          attackValue,
+          defenseValue,
+          'assets/images/cavaliere_1.png',
+          Team.red,
+          '',
+        );
+        break;
+      case Photo.knigthRed:
+        hero = Archer(
+          inputText.text,
+          attackValue,
+          defenseValue,
+          'assets/images/cavaliere_1_1.png',
+          Team.red,
+          '',
+        );
+        break;
+    }
+
+    setTeams.add(hero);
+    print(hero);
   }
 
   void setAttackValue(value) {

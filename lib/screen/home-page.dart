@@ -25,7 +25,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void restartApplication() {
-    teams.forEach((character) => character.health = 100);
+    //teams.forEach((character) => character.health = 100);
+    for (var character in teams) {
+      character.health = 100;
+    }
 
     //print(teamBlue);
     setState(() {
