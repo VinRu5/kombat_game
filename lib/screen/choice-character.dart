@@ -6,6 +6,7 @@ import 'package:kombat_game/components/title-game.dart';
 import 'package:kombat_game/components/title-team.dart';
 import 'package:kombat_game/models/character.dart';
 
+/// classe per gestire la scelta del personaggio
 class ChoiceCharacter extends StatelessWidget {
   void Function(Character character) choicedThis;
   final List<Character> teams;

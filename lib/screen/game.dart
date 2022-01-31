@@ -4,6 +4,7 @@ import 'package:kombat_game/components/sentences_turn.dart';
 import 'package:kombat_game/models/character.dart';
 import 'package:kombat_game/models/sentence.dart';
 
+/// classe che gestisce il gioco e tutta la sua logica
 class Game extends StatefulWidget {
   late Character userCharacter;
   late Character challangerCharacter;
@@ -20,12 +21,16 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
+  /// variabile per tenere il conteggio del turno
   int countTurn = 0;
+
   late Character userCharacter;
   late Character challangerCharacter;
 
+  /// array che raccoglie le frasi dei personaggi durante il duello
   List<SentenceTurn> sentences = [];
 
+  /// gestisce il turno di gioco
   nextTurn() {
     Character striker;
 

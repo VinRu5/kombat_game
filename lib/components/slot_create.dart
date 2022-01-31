@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// classe che renderizza il box generico della creazione eroe
 class SlotCreate extends StatelessWidget {
+  /// prende dei parametri figlio e testo per la personalizzazione
   final Widget child;
   final String? text;
   const SlotCreate({

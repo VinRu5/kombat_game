@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// renderizza il titolo del gioco
 class TitleGame extends StatelessWidget {
   final String value;
   const TitleGame(this.value, {Key? key}) : super(key: key);

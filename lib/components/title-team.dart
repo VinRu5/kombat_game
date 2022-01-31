@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/components/title_style.dart';
 
+/// gestisce i due titoli delle squadra
 class TitleTeam extends StatelessWidget {
   const TitleTeam({Key? key}) : super(key: key);
 

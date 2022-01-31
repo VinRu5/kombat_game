@@ -4,6 +4,7 @@ import 'package:kombat_game/screen/choice-character.dart';
 import 'package:kombat_game/screen/create_character.dart';
 import 'package:kombat_game/screen/game.dart';
 
+/// classe che gestisce l'home page dell'app e tutto il suo stato
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -12,11 +13,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  /// gestisce la visualizzazione della pagina corrente
   bool userChoose = false;
+
+  /// personaggio scelto dall'utente
   late Character userCharacter;
+
+  /// personaggio sfidante
   late Character challangerCharacter;
+
+  /// contiene tutti i personaggi
   late List<Character> teams;
 
+  /// al caricamento della pagina prendo il mio array di riferimento
   @override
   void initState() {
     teams = setTeams;
@@ -24,18 +33,19 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  /// funzione per resettare la vita dei personaggi a fine duello e ricominciare a giocare
   void restartApplication() {
     //teams.forEach((character) => character.health = 100);
     for (var character in teams) {
       character.health = 100;
     }
 
-    //print(teamBlue);
     setState(() {
       userChoose = false;
     });
   }
 
+  /// gestisce la scelta dell'utente e l'estrazione dello sfidante
   void choicedThis(Character character) {
     List<Character> challangerTeam = getTeamBlue().toList();
 
@@ -61,6 +71,8 @@ class _HomePageState extends State<HomePage> {
           title: Text('Kombat Game'),
           centerTitle: true,
           backgroundColor: Colors.amber.shade700,
+
+          /// tab bar che gestisce la pagina game e la pagina creazione
           bottom: TabBar(
             indicatorColor: Colors.white,
             tabs: [
@@ -79,6 +91,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// sceglie la vista nell'app
   Widget viewUserChoose() => userChoose
       ? Game(
           userCharacter: userCharacter,

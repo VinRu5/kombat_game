@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// renderizza il sotto titolo del gioco
 class Subtitle extends StatelessWidget {
   final String value;
   const Subtitle(this.value, {Key? key}) : super(key: key);

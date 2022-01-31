@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// classe che salva le frasi dei duellanti
 class Sentence {
   late String text;
   late IconData action;
@@ -12,6 +13,7 @@ class Sentence {
   });
 }
 
+/// classe che gestisce il turno
 class SentenceTurn {
   late Sentence userSentence;
   late Sentence challangerSentence;

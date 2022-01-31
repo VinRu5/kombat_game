@@ -3,6 +3,7 @@ import 'package:kombat_game/components/editor_line.dart';
 import 'package:kombat_game/components/slot_create.dart';
 import 'package:kombat_game/models/character.dart';
 
+/// Classe per gestire la pagina di creazione personaggio
 class CreateCharacter extends StatefulWidget {
   const CreateCharacter({Key? key}) : super(key: key);
 
@@ -11,21 +12,31 @@ class CreateCharacter extends StatefulWidget {
 }
 
 class _CreateCharacterState extends State<CreateCharacter> {
+  /// variabile per gestire il valore dei radio
   Photo photoValue = Photo.warriorBlue;
+
+  /// controller per gestire l'input
   TextEditingController inputText = TextEditingController();
+
+  /// valore per settare attacco e difesa del nuovo personaggio
   int attackValue = 10;
   int defenseValue = 10;
+
+  /// validate per input
   bool _validate = false;
 
+  /// set il valore al cambio del radio
   void setRadio(value) {
     setState(() {
       photoValue = value;
     });
   }
 
+  /// prende i valori dagli input e genera il nuovo personaggio
   void generateHero() {
     if (inputText.text.isEmpty) {
       setState(() {
+        /// validazione => il nome deve essere inserito per forza
         _validate = true;
       });
     } else {
@@ -110,18 +121,38 @@ class _CreateCharacterState extends State<CreateCharacter> {
       }
 
       setTeams.add(hero);
-      print(hero);
+      showDialog(
+        context: context,
+        builder: (contex) => AlertDialog(
+          title: Text('Nuovo Eroe'),
+          content: Text(
+              'Hai creato un nuovo eroe. Torna all\'home page per giocare'),
+          actions: [
+            ElevatedButton(
+              onPressed: () => Navigator.pop(contex),
+              child: Text('ok'),
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.amber.shade700),
+              ),
+            ),
+          ],
+        ),
+      );
     }
 
+    /// pulisco l'input
     inputText.clear();
   }
 
+  /// setto il valore di attacco
   void setAttackValue(value) {
     setState(() {
       attackValue = value;
     });
   }
 
+  /// setto il valore di difesa
   void setDefenseValue(value) {
     setState(() {
       defenseValue = value;
@@ -183,6 +214,7 @@ class _CreateCharacterState extends State<CreateCharacter> {
     );
   }
 
+  /// genero la parte grafica di gestione delle proprietà dell'eroe
   Widget characterEditor() => Column(
         children: [
           EditorLine(
@@ -196,6 +228,7 @@ class _CreateCharacterState extends State<CreateCharacter> {
         ],
       );
 
+  /// genero la parte grafica per la scelta della foto eroe
   Widget viewImages() => Column(
         children: [
           SizedBox(

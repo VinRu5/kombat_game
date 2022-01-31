@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kombat_game/models/character.dart';
 
+/// gestisce la grafica della card che racchiude il personaggio
 class CharacterCard extends StatelessWidget {
   final Character character;
   final String color;

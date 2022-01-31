@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// classe renderizza l'assegnazione degli attributi all'eroe
 class EditorLine extends StatefulWidget {
   final String text;
   void Function(int value) onChange;

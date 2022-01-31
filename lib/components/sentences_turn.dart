@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kombat_game/components/sentences.dart';
 import 'package:kombat_game/models/sentence.dart';
 
+/// Classe che renderizza le frasi dei duellanti
 class SentencesTurn extends StatelessWidget {
   final List<SentenceTurn> sentences;
   const SentencesTurn({

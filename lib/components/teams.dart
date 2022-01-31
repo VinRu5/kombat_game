@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kombat_game/components/character_card.dart';
 import 'package:kombat_game/models/character.dart';
 
+/// gestisce i teams
 class Teams extends StatelessWidget {
   void Function(Character character) choicedThis;
   final List<Character> teams;
@@ -12,6 +13,7 @@ class Teams extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// visualizza un Dialog quando il personaggio è scelto
   void advertisingToChoose(context, character) {
     showDialog(
       context: context,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kombat_game/components/challanger_card.dart';
 import 'package:kombat_game/models/character.dart';
 
+/// classe che renderizzza graficamente i due sfidante nel duello
 class ChallengingCharacters extends StatelessWidget {
   final Character userCharacter;
   final Character challangerCharacter;

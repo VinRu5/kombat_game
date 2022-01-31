@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// genera automaticamente lo stile in base al colore passato
 class TitleStyle extends StatelessWidget {
   final String text;
   final String color;
